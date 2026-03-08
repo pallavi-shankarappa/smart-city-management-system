@@ -4,7 +4,7 @@ import axios from "axios";
 // so the browser never talks to the backend origin directly (no CORS issue).
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://smart-city-management-system-1-ww8u.onrender.com",
 });
 // Add token automatically if exists
 API.interceptors.request.use((req) => {
