@@ -4,7 +4,7 @@ import axios from "axios";
 // so the browser never talks to the backend origin directly (no CORS issue).
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
 });
 
 // Add token automatically if exists

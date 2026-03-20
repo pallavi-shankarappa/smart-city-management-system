@@ -18,9 +18,21 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const uploadsPath = path.join(__dirname, "..", "uploads");
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  process.env.CLIENT_ORIGIN,
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
@@ -31,7 +43,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(uploadsPath));
 
 app.get("/api/health", (req, res) => {
-  res.json({ status: "ok" });
+  res.json({ status: "ok", env: process.env.NODE_ENV });
+});
+
+// Database middleware for serverless
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    next(err);
+  }
 });
 
 app.use("/api/auth", authRoutes);
@@ -44,9 +66,11 @@ app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
 
-connectDB().then(() => {
+if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
     console.log(`🚀 Server listening on http://localhost:${port}`);
   });
-});
+}
+
+export default app;
 
