@@ -152,7 +152,12 @@ smart-city-management/
 ## 👤 Author
 
 **Pallavi**  
+<<<<<<< HEAD
 - GitHub: [pallavi-github-link](https://github.com/palla)
+=======
+- GitHub: [pallavi-github-link](https://github.com/pallavi-shankarappa)
+- Vercel:https://smart-city-management-system-kappa.vercel.app/
+>>>>>>> 522c2a2f62e1ebfa3a593cf9f7d368d07b357bd4
 
 ---
 *Developed with ❤️ for a Smarter City.*
