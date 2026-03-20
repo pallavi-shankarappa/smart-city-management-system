@@ -4,15 +4,18 @@ import axios from "axios";
 // so the browser never talks to the backend origin directly (no CORS issue).
 
 const API = axios.create({
-  baseURL: "https://smart-city-management-system-1-h0io.onrender.com",
+  baseURL: "http://localhost:5000/api",
 });
+
 // Add token automatically if exists
-API.interceptors.request.use((req) => {
+API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
-    req.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token}`;
   }
-  return req;
+  return config;
+}, (error) => {
+  return Promise.reject(error);
 });
 
 export default API;

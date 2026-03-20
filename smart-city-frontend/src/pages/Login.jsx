@@ -22,18 +22,21 @@ function Login() {
         password,
       });
 
+      // login(data.token) updates AuthContext state and persists to localStorage
       login(data.token);
 
       const decoded = jwtDecode(data.token);
 
+      // Redirect based on role
       if (decoded.role === "officer") {
-        navigate("/officer");
+        navigate("/officer", { replace: true });
       } else {
-        navigate("/citizen");
+        navigate("/citizen", { replace: true });
       }
 
     } catch (error) {
-      alert(error.response?.data?.message || "Login failed");
+      console.error("Login Error:", error);
+      alert(error.response?.data?.message || "Login failed. Please check your credentials.");
     } finally {
       setLoading(false);
     }

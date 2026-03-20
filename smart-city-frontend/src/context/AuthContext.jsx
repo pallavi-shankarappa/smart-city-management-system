@@ -13,14 +13,20 @@ function safeDecode(token) {
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
-  const user = useMemo(() => (token ? safeDecode(token) : null), [token]);
+  const [user, setUser] = useState(() => {
+    const savedToken = localStorage.getItem("token");
+    return savedToken ? safeDecode(savedToken) : null;
+  });
 
   useEffect(() => {
-    if (!token) {
+    if (token) {
+      localStorage.setItem("token", token);
+      const decoded = safeDecode(token);
+      setUser(decoded);
+    } else {
       localStorage.removeItem("token");
-      return;
+      setUser(null);
     }
-    localStorage.setItem("token", token);
   }, [token]);
 
   const value = useMemo(
@@ -29,7 +35,10 @@ export function AuthProvider({ children }) {
       user, // { id, role, iat, exp }
       isAuthed: Boolean(token && user),
       login: (newToken) => setToken(newToken),
-      logout: () => setToken(null),
+      logout: () => {
+        setToken(null);
+        localStorage.removeItem("token");
+      },
     }),
     [token, user]
   );

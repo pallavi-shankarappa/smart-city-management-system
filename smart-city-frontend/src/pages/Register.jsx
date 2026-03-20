@@ -17,20 +17,29 @@ function Register() {
 
     try {
       setLoading(true);
-      await API.post("/auth/register", {
-        name,
-        email,
-        password,
-        role,
-        department: role === "officer" ? department : undefined,
-      });
 
-      alert("Registration successful");
+      const response = await API.post(
+        "/auth/register",
+        {
+          name,
+          email,
+          password,
+          role,
+          department: role === "officer" ? department : null
+        }
+      );
 
-      navigate("/login", { replace: true });
+      alert(response.data.message || "Registration successful");
+
+      navigate("/login");
 
     } catch (error) {
-      alert(error.response?.data?.message || "Registration failed");
+      console.error(error);
+
+      alert(
+        error.response?.data?.message ||
+        "Registration failed. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -40,13 +49,16 @@ function Register() {
     <div className="mx-auto max-w-md px-4 py-10">
       <div className="rounded-2xl border bg-white p-6 shadow-sm">
         <h1 className="text-xl font-semibold">Register</h1>
-        <p className="mt-1 text-sm text-slate-600">Create your account as a citizen or officer.</p>
+        <p className="mt-1 text-sm text-slate-600">
+          Create your account as a citizen or officer.
+        </p>
 
         <form onSubmit={handleRegister} className="mt-6 space-y-4">
+
           <div>
             <label className="text-sm font-medium">Full name</label>
             <input
-              className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-slate-300"
+              className="mt-1 w-full rounded-lg border px-3 py-2"
               type="text"
               placeholder="Your name"
               value={name}
@@ -58,7 +70,7 @@ function Register() {
           <div>
             <label className="text-sm font-medium">Email</label>
             <input
-              className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-slate-300"
+              className="mt-1 w-full rounded-lg border px-3 py-2"
               type="email"
               placeholder="you@example.com"
               value={email}
@@ -70,7 +82,7 @@ function Register() {
           <div>
             <label className="text-sm font-medium">Password</label>
             <input
-              className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-slate-300"
+              className="mt-1 w-full rounded-lg border px-3 py-2"
               type="password"
               placeholder="Min 6 characters"
               value={password}
@@ -83,7 +95,7 @@ function Register() {
           <div>
             <label className="text-sm font-medium">Role</label>
             <select
-              className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-slate-300"
+              className="mt-1 w-full rounded-lg border px-3 py-2"
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
@@ -94,11 +106,11 @@ function Register() {
 
           {role === "officer" && (
             <div>
-              <label className="text-sm font-medium">Department (optional)</label>
+              <label className="text-sm font-medium">Department</label>
               <input
-                className="mt-1 w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-slate-300"
+                className="mt-1 w-full rounded-lg border px-3 py-2"
                 type="text"
-                placeholder="Roads / Water / Electricity / Sanitation"
+                placeholder="Roads / Water / Electricity"
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
               />
@@ -107,15 +119,19 @@ function Register() {
 
           <button
             disabled={loading}
-            className="w-full rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 disabled:opacity-60"
+            className="w-full rounded-lg bg-slate-900 px-4 py-2 text-white"
             type="submit"
           >
             {loading ? "Creating..." : "Register"}
           </button>
+
         </form>
 
         <p className="mt-4 text-sm text-slate-600">
-          Already have an account? <Link className="font-medium text-slate-900 underline" to="/login">Login</Link>
+          Already have an account?{" "}
+          <Link className="underline" to="/login">
+            Login
+          </Link>
         </p>
       </div>
     </div>

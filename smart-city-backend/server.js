@@ -25,7 +25,10 @@ const limiter = rateLimit({
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(limiter);
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:5173", "http://localhost:5174"],
+  credentials: true
+}));
 app.use("/uploads", express.static("uploads"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
