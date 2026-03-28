@@ -1,52 +1,53 @@
 # Smart City Management System
 
-A full-stack MERN (MongoDB, Express, React, Node.js) web application designed to streamline urban services and city administration. The system provides separate portals for citizens and officers to manage city-related issues, service requests, and administrative tasks.
+A professional full-stack MERN (MongoDB, Express, React, Node.js) web application designed to streamline urban services and city administration. The system provides separate portals for citizens and officers to manage city-related issues, service requests, and administrative tasks with robust validation and error handling.
 
-## 🚀 Project Overview
+##  Project Overview
 
-The Smart City Management System is a comprehensive platform that bridges the gap between citizens and city administration. It enables citizens to report issues like waste management, electricity complaints, and road maintenance, while allowing officers to manage these requests efficiently.
+The Smart City Management System is a comprehensive platform that bridges the gap between citizens and city administration. It enables citizens to report issues like waste management, electricity complaints, and road maintenance, while allowing officers to manage these requests efficiently through a streamlined workflow.
 
-## 🛠 Tech Stack
+##  Tech Stack
 
-- **Frontend**: React.js (Vite), React Router, Tailwind CSS, Axios, Chart.js, React-Leaflet
-- **Backend**: Node.js, Express.js
+- **Frontend**: React.js (Vite), React Router, Tailwind CSS, Axios, Chart.js, React-Leaflet, i18next (Internationalization)
+- **Backend**: Node.js, Express.js (ES Modules)
 - **Database**: MongoDB Atlas (Mongoose ODM)
-- **Authentication**: JSON Web Token (JWT)
-- **Security**: bcryptjs for password hashing
-- **Development**: ESLint, PostCSS, Vite
+- **Authentication**: JSON Web Token (JWT) with Role-Based Access Control
+- **Security**: bcryptjs for password hashing, express-validator for request validation
+- **Development**: ESLint, PostCSS, Vite, Nodemon
 
-## ✨ Features
+##  Features
 
 ### For Citizens:
-- **Secure Registration & Login**: Create accounts and log in securely.
-- **Issue Reporting**: Submit service requests/complaints with categories (Waste, Water, Roads, etc.).
+- **Secure Registration & Login**: Detailed registration including phone numbers.
+- **Issue Reporting**: Submit service requests/complaints with categories (Waste, Water, Roads, etc.) and location pinning.
 - **Dashboard**: Track the status of submitted complaints in real-time.
-- **Profile Management**: Manage personal details and view history.
+- **Multilingual Support**: Available in English, Hindi, and Kannada.
 
 ### For Officers:
-- **Admin Dashboard**: Overview of all city complaints and analytics.
-- **Issue Management**: View, track, and update the status of citizen requests (Pending, In Progress, Resolved).
-- **Interactive Maps**: View complaint locations using Leaflet.
-- **Service Oversight**: Manage different city departments efficiently.
+- **Admin Dashboard**: Overview of all city complaints with real-time analytics.
+- **Issue Management**: View, track, and update the status of citizen requests (**Pending → In Progress → Resolved**).
+- **Interactive Maps**: View exact complaint locations using Leaflet.
+- **Department Oversight**: Officers are categorized by departments (Water, Road, Electricity, etc.).
 
 ### General:
-- **Role-Based Access Control (RBAC)**: Distinct permissions for Citizens and Officers.
-- **Persistent Sessions**: Stay logged in across refreshes using localStorage.
-- **RESTful APIs**: Well-structured backend endpoints.
-- **Responsive Design**: Fully functional across all device sizes.
+- **Professional Validation**: Comprehensive backend validation using `express-validator`.
+- **Robust Error Handling**: Detailed API error responses and frontend alerts.
+- **Role-Based Access Control (RBAC)**: Distinct permissions for Citizens, Officers, and Admins.
+- **Persistent Sessions**: Secure JWT-based authentication persisted in localStorage.
+- **Responsive Design**: Optimized for all device sizes using Tailwind CSS.
 
-## 🏗 System Architecture
+##  System Architecture
 
-The application follows a client-server architecture:
-1.  **Frontend (React)**: Handles the UI, routing, and state management.
-2.  **Backend (Express/Node)**: Provides RESTful API endpoints, handles business logic, and authentication.
-3.  **Database (MongoDB)**: Stores user data, complaints, and service logs.
+The application follows a clean client-server architecture:
+1.  **Frontend (React)**: Handles the UI, routing, state management, and internationalization.
+2.  **Backend (Express/Node)**: Follows MVC pattern, provides RESTful API endpoints, and handles business logic.
+3.  **Database (MongoDB)**: Stores user data, complaints, and service logs with strict schemas.
 4.  **Auth (JWT)**: Ensures secure communication between client and server.
 
-## ⚙️ Installation and Setup Instructions
+##  Installation and Setup Instructions
 
 ### Prerequisites:
-- Node.js (v16+ recommended)
+- Node.js (v18+ recommended)
 - MongoDB Atlas account
 - Git
 
@@ -60,21 +61,21 @@ The application follows a client-server architecture:
 
 2. **Backend Setup:**
    ```bash
-   cd server
+   cd backend
    npm install
    ```
-   Create a `.env` file in the `server` directory and add the environment variables listed below.
+   Create a `.env` file in the `backend` directory based on `.env.example`.
 
 3. **Frontend Setup:**
    ```bash
-   cd ../smart-city-frontend
+   cd ../frontend
    npm install
    ```
-   Create a `.env` file in the `smart-city-frontend` directory.
+   Create a `.env` file in the `frontend` directory based on `.env.example`.
 
 4. **Run the Application:**
    
-   *In the server directory:*
+   *In the backend directory:*
    ```bash
    npm run dev
    ```
@@ -83,76 +84,84 @@ The application follows a client-server architecture:
    npm run dev
    ```
 
-## 🔑 Environment Variables
+##  Environment Variables
 
-### Backend (.env)
+### Backend (`backend/.env`)
 ```env
 PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
-CLIENT_ORIGIN=http://localhost:5174
+MONGO_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=your_super_secret_jwt_key
+NODE_ENV=development
+CLIENT_URL=http://localhost:5173
 ```
 
-### Frontend (.env)
+### Frontend (`frontend/.env`)
 ```env
 VITE_API_URL=http://localhost:5000/api
 ```
 
-## 🛣 API Endpoints (Examples)
+##  API Endpoints (Examples)
 
 ### Auth Routes (`/api/auth`)
-- `POST /register`: Register a new user (Citizen/Officer)
+- `POST /register`: Register a new user (Requires: `name`, `email`, `password`, `role`, `phone`, and `department` for officers)
 - `POST /login`: Login and receive JWT token
 
 ### Complaint Routes (`/api/complaints`)
-- `GET /`: Get all complaints (Officer) or user-specific (Citizen)
-- `POST /`: Create a new complaint
-- `PUT /:id`: Update complaint status (Officer)
+- `GET /`: List complaints (Filtered by role)
+- `POST /`: Create a new complaint (Requires: `title`, `description`, `category`, `ward`, `location`)
+- `GET /:id`: Get detailed complaint info
+- `PUT /:id/status`: Update status (Officer only: **Pending → In Progress → Resolved**)
 
 ### Dashboard Routes (`/api/dashboard`)
-- `GET /stats`: Get complaint statistics for analytics
+- `GET /stats`: Get real-time statistics for analytics
 
-## 📂 Folder Structure
+##  Folder Structure
 
 ```
 smart-city-management/
-├── server/                 # Backend Node/Express app
-│   ├── config/             # DB connection
-│   ├── controllers/        # Route logic
-│   ├── middleware/         # Auth & error handling
-│   ├── models/             # Mongoose schemas
-│   ├── routes/             # API endpoints
-│   └── server.js           # Entry point
-├── smart-city-frontend/    # Frontend React app
+├── backend/                 # Node.js + Express API (ES Modules)
+│   ├── config/              # DB connection & Configuration
+│   ├── controllers/         # Business Logic (Auth, Complaint, Dashboard, User)
+│   ├── middleware/          # Auth, Validation, & Uploads
+│   ├── models/              # Mongoose Schemas (User, Complaint)
+│   ├── routes/              # Express Routes
+│   └── server.js            # Entry point
+├── frontend/                # React.js + Vite app
 │   ├── src/
-│   │   ├── components/     # Reusable UI components
-│   │   ├── context/        # Auth state management
-│   │   ├── pages/          # Main views
-│   │   ├── services/       # Axios API config
-│   │   └── App.jsx         # Routing
+│   │   ├── components/      # Reusable UI components
+│   │   ├── context/         # Auth state management
+│   │   ├── pages/           # Main views (Citizen/Officer Dashboards)
+│   │   ├── services/        # Axios API configuration
+│   │   └── App.jsx          # Routing & Layout
 │   └── vite.config.js
 └── README.md
 ```
 
-## 📸 Screenshots
-- Citizen Dashboard
+##  Screenshots
+   <img width="1596" height="852" alt="image" src="https://github.com/user-attachments/assets/c7e4d5a3-2013-46fa-958b-9f2ff91bd24f" />
 
-- Officer Dashboard
-- Complaint Form
-- Analytics Chart
+- **Citizen Dashboard**: Real-time tracking of issues.
+  <img width="1600" height="844" alt="image" src="https://github.com/user-attachments/assets/50d15866-db7e-4a91-aa9d-1b2ff9e7fb8a" />
 
-## 🔮 Future Improvements
+- **Officer Dashboard**: Cross-department visibility and analytics.
+  <img width="1600" height="836" alt="image" src="https://github.com/user-attachments/assets/4248a759-ff7a-47f7-97df-33a6b4b94fff" />
 
-- [ ] Email/SMS notifications for status updates.
+- **Interactive Map**: Geographical distribution of complaints.
+  <img width="1600" height="852" alt="image" src="https://github.com/user-attachments/assets/23e2439a-30d0-4f39-a89b-faa5cd0b8ff0" />
+
+
+##  Future Improvements
+
+- [ ] AI-based automated complaint categorization.
 - [ ] Real-time chat between Citizens and Officers.
-- [ ] AI-based complaint categorization.
-- [ ] Mobile application version.
+- [ ] Email/SMS notifications for every status update.
+- [ ] Mobile application (React Native).
 
-## 👤 Author
+##  Author
 
 **Pallavi**  
-- GitHub: [pallavi-github-link](https://github.com/pallavi-shankarappa)
-- Vercel: https://smart-city-management-system-kappa.vercel.app/
+- GitHub: [pallavi-shankarappa](https://github.com/pallavi-shankarappa)
+- Live Demo: [Smart City Platform](https://smart-city-management-system-kappa.vercel.app/)
 
 ---
 *Developed with ❤️ for a Smarter City.*
