@@ -135,9 +135,8 @@ smart-city-management/
 ```
 
 ## 📸 Screenshots
-
-*Add screenshots here to showcase your beautiful UI!*
 - Citizen Dashboard
+
 - Officer Dashboard
 - Complaint Form
 - Analytics Chart
@@ -152,12 +151,8 @@ smart-city-management/
 ## 👤 Author
 
 **Pallavi**  
-<<<<<<< HEAD
-- GitHub: [pallavi-github-link](https://github.com/palla)
-=======
 - GitHub: [pallavi-github-link](https://github.com/pallavi-shankarappa)
-- Vercel:https://smart-city-management-system-kappa.vercel.app/
->>>>>>> 522c2a2f62e1ebfa3a593cf9f7d368d07b357bd4
+- Vercel: https://smart-city-management-system-kappa.vercel.app/
 
 ---
 *Developed with ❤️ for a Smarter City.*
