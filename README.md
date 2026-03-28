@@ -137,21 +137,31 @@ smart-city-management/
 └── README.md
 ```
 
+<<<<<<< HEAD
 ##  Screenshots
    <img width="1596" height="852" alt="image" src="https://github.com/user-attachments/assets/c7e4d5a3-2013-46fa-958b-9f2ff91bd24f" />
 
 - **Citizen Dashboard**: Real-time tracking of issues.
   <img width="1600" height="844" alt="image" src="https://github.com/user-attachments/assets/50d15866-db7e-4a91-aa9d-1b2ff9e7fb8a" />
+=======
+## 📸 Screenshots
+- **Citizen Dashboard**: Real-time tracking of issues.
+- **Officer Dashboard**: Cross-department visibility and analytics.
+- **Interactive Map**: Geographical distribution of complaints.
+>>>>>>> 550cdc4 (Updated frontend API URL for production deployment)
 
 - **Officer Dashboard**: Cross-department visibility and analytics.
   <img width="1600" height="836" alt="image" src="https://github.com/user-attachments/assets/4248a759-ff7a-47f7-97df-33a6b4b94fff" />
 
+<<<<<<< HEAD
 - **Interactive Map**: Geographical distribution of complaints.
   <img width="1600" height="852" alt="image" src="https://github.com/user-attachments/assets/23e2439a-30d0-4f39-a89b-faa5cd0b8ff0" />
 
 
 ##  Future Improvements
 
+=======
+>>>>>>> 550cdc4 (Updated frontend API URL for production deployment)
 - [ ] AI-based automated complaint categorization.
 - [ ] Real-time chat between Citizens and Officers.
 - [ ] Email/SMS notifications for every status update.
