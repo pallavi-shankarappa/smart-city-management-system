@@ -8,7 +8,7 @@ The Smart City Management System is a comprehensive platform that bridges the ga
 
 ##  Tech Stack
 
-- **Frontend**: React.js (Vite), React Router, Tailwind CSS, Axios, Chart.js, React-Leaflet, i18next (Internationalization)
+- **Frontend**: React.js (Vite), React Router, Tailwind CSS, Axios
 - **Backend**: Node.js, Express.js (ES Modules)
 - **Database**: MongoDB Atlas (Mongoose ODM)
 - **Authentication**: JSON Web Token (JWT) with Role-Based Access Control
@@ -32,7 +32,7 @@ The Smart City Management System is a comprehensive platform that bridges the ga
 ### General:
 - **Professional Validation**: Comprehensive backend validation using `express-validator`.
 - **Robust Error Handling**: Detailed API error responses and frontend alerts.
-- **Role-Based Access Control (RBAC)**: Distinct permissions for Citizens, Officers, and Admins.
+- **Role-Based Access Control (RBAC)**: Distinct permissions for Citizens, Officers.
 - **Persistent Sessions**: Secure JWT-based authentication persisted in localStorage.
 - **Responsive Design**: Optimized for all device sizes using Tailwind CSS.
 
@@ -55,7 +55,7 @@ The application follows a clean client-server architecture:
 
 1. **Clone the Repository:**
    ```bash
-   git clone <your-repository-url>
+   git clone <https://github.com/pallavi-shankarappa>
    cd "smart city management"
    ```
 
@@ -100,21 +100,6 @@ CLIENT_URL=http://localhost:5173
 VITE_API_URL=http://localhost:5000/api
 ```
 
-##  API Endpoints (Examples)
-
-### Auth Routes (`/api/auth`)
-- `POST /register`: Register a new user (Requires: `name`, `email`, `password`, `role`, `phone`, and `department` for officers)
-- `POST /login`: Login and receive JWT token
-
-### Complaint Routes (`/api/complaints`)
-- `GET /`: List complaints (Filtered by role)
-- `POST /`: Create a new complaint (Requires: `title`, `description`, `category`, `ward`, `location`)
-- `GET /:id`: Get detailed complaint info
-- `PUT /:id/status`: Update status (Officer only: **Pending → In Progress → Resolved**)
-
-### Dashboard Routes (`/api/dashboard`)
-- `GET /stats`: Get real-time statistics for analytics
-
 ##  Folder Structure
 
 ```
@@ -137,31 +122,23 @@ smart-city-management/
 └── README.md
 ```
 
-<<<<<<< HEAD
-##  Screenshots
-   <img width="1596" height="852" alt="image" src="https://github.com/user-attachments/assets/c7e4d5a3-2013-46fa-958b-9f2ff91bd24f" />
-
-- **Citizen Dashboard**: Real-time tracking of issues.
-  <img width="1600" height="844" alt="image" src="https://github.com/user-attachments/assets/50d15866-db7e-4a91-aa9d-1b2ff9e7fb8a" />
-=======
 ## 📸 Screenshots
-- **Citizen Dashboard**: Real-time tracking of issues.
-- **Officer Dashboard**: Cross-department visibility and analytics.
-- **Interactive Map**: Geographical distribution of complaints.
->>>>>>> 550cdc4 (Updated frontend API URL for production deployment)
+
+-  **Citizen Dashboard**: Real-time tracking of issues.
+  <img width="1596" height="852" alt="image" src="https://github.com/user-attachments/assets/c7e4d5a3-2013-46fa-958b-9f2ff91bd24f" />
+
+-  **Officer Dashboard**: Cross-department visibility and analytics.
+  <img width="1600" height="844" alt="image" src="https://github.com/user-attachments/assets/50d15866-db7e-4a91-aa9d-1b2ff9e7fb8a" />
+
+-  **Interactive Map**: Geographical distribution of complaints.
+  <img width="1600" height="836" alt="image" src="https://github.com/user-attachments/assets/4248a759-ff7a-47f7-97df-33a6b4b94fff" />
 
 - **Officer Dashboard**: Cross-department visibility and analytics.
   <img width="1600" height="836" alt="image" src="https://github.com/user-attachments/assets/4248a759-ff7a-47f7-97df-33a6b4b94fff" />
 
-<<<<<<< HEAD
-- **Interactive Map**: Geographical distribution of complaints.
-  <img width="1600" height="852" alt="image" src="https://github.com/user-attachments/assets/23e2439a-30d0-4f39-a89b-faa5cd0b8ff0" />
 
 
 ##  Future Improvements
-
-=======
->>>>>>> 550cdc4 (Updated frontend API URL for production deployment)
 - [ ] AI-based automated complaint categorization.
 - [ ] Real-time chat between Citizens and Officers.
 - [ ] Email/SMS notifications for every status update.
